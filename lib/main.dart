@@ -1,7 +1,9 @@
 import 'package:counter_app/bloc/counter/counter_bloc.dart';
+import 'package:counter_app/bloc/favourite_app/favourite_app_bloc.dart';
 import 'package:counter_app/bloc/switch_example/switch_example_bloc.dart';
 import 'package:counter_app/bloc/todo/todo_bloc.dart';
-import 'package:counter_app/ui/todo/todo_screen.dart';
+import 'package:counter_app/repositories/favourite_repository.dart';
+import 'package:counter_app/ui/favourite_app/favourite_app_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,14 +25,22 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => SwitchExampleBloc(),
         ),
-        BlocProvider(create: (_) => TodoBloc())
+        BlocProvider(
+          create: (_) => TodoBloc(),
+        ),
+        BlocProvider(
+          create: (_) => FavouriteAppBloc(FavouriteRepository()),
+        ),
       ],
       child: MaterialApp(
+        themeMode: ThemeMode.dark,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const TodoScreen(),
+        darkTheme:
+            ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.red)),
+        home: const FavouriteAppScreen(),
       ),
     );
   }
