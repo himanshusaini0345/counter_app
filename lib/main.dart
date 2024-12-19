@@ -1,9 +1,11 @@
 import 'package:counter_app/bloc/counter/counter_bloc.dart';
 import 'package:counter_app/bloc/favourite_app/favourite_app_bloc.dart';
+import 'package:counter_app/bloc/posts/posts_bloc.dart';
 import 'package:counter_app/bloc/switch_example/switch_example_bloc.dart';
 import 'package:counter_app/bloc/todo/todo_bloc.dart';
 import 'package:counter_app/repositories/favourite_repository.dart';
-import 'package:counter_app/ui/favourite_app/favourite_app_screen.dart';
+import 'package:counter_app/repositories/posts_repository.dart';
+import 'package:counter_app/ui/posts/posts_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,6 +33,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => FavouriteAppBloc(FavouriteRepository()),
         ),
+        BlocProvider(
+          create: (_) => PostsBloc(postsRepository: PostsRepository()),
+        )
       ],
       child: MaterialApp(
         themeMode: ThemeMode.dark,
@@ -40,7 +45,7 @@ class MyApp extends StatelessWidget {
         ),
         darkTheme:
             ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.red)),
-        home: const FavouriteAppScreen(),
+        home: const PostsScreen(),
       ),
     );
   }
