@@ -1,4 +1,5 @@
 import 'package:counter_app/bloc/posts/posts_bloc.dart';
+import 'package:counter_app/ui/counter/counter_screen.dart';
 import 'package:counter_app/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +22,28 @@ class _PostsScreenState extends State<PostsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CounterScreen(),
+              ),
+            ); // Handle back navigation
+          },
+        ),
         title: Text('Posts'),
+        // actions: [
+        //   BlocBuilder<CounterBloc, CounterState>(builder: (context, state) {
+        //     return Center(
+        //       child: Text(
+        //         state.counter.toString(),
+        //         style: TextStyle(fontSize: 60),
+        //       ),
+        //     );
+        //   }),
+        // ],
       ),
       body: BlocBuilder<PostsBloc, PostsState>(builder: (context, state) {
         switch (state.postStatus) {
